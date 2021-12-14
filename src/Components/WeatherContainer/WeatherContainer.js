@@ -1,13 +1,11 @@
-import WeatherIndicator from "../WeatherIndicator/WeatherIndicator";
+import Forcast from "../Forcast";
 
 const WeatherContainer = ({ data }) => {
-    return (
-        <div className="weather-group">
-            {data.map((dataDay, idx) => (
-                <WeatherIndicator key={dataDay.date} today={idx === 0} data={dataDay} />
-            ))}
-        </div>
-    );
+  return (
+    <div className="weather-group">
+      <Forcast />
+    </div>
+  );
 };
 
 export default WeatherContainer;
