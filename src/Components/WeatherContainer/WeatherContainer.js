@@ -1,4 +1,4 @@
-import Forcast from "../Forcast";
+import Forcast from "../Forcast/Forcast";
 
 const WeatherContainer = ({ data }) => {
   return (
