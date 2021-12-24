@@ -26,7 +26,12 @@ const Conditions = (props) => {
     //     </div>
     //   ) : null}
     // </div>
-    <div>{props.data && <p>{props.data.current.temp}</p>}</div>
+    <div>
+      {props.data &&
+        props.data.daily.map((props) => {
+          return <p key={props.data.dt}>{props.data.temp.day}</p>;
+        })}
+    </div>
   );
 };
 

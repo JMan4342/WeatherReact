@@ -32,7 +32,7 @@ const Forcast = () => {
 
   const [data] = useFetch(
     // `https://api.openweathermap.org/data/2.5/forecast?q=phoenix&appid=${REACT_APP_API_KEY}`
-    `https://api.openweathermap.org/data/2.5/onecall?lat=33.44277&lon=-112.072754&appid=${REACT_APP_API_KEY}`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=33.44277&lon=-112.072754&units=imperial&appid=${REACT_APP_API_KEY}`
     // `https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${REACT_APP_API_KEY}`
   );
   console.log("hello", data);
@@ -58,7 +58,13 @@ const Forcast = () => {
         {
         data &&
           data.daily.map((data) => {
-            return <p key={data.dt}>{data.temp.day}</p>;
+            return (
+
+            <div key={data.dt}>
+            <p>{Date(data.dt*1000)}</p>
+            <p>{Math.floor(data.temp.day)}&#8457;</p>
+            </div>
+            )
           })}
       </div>
     </div>
