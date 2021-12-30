@@ -27,7 +27,7 @@ const Forcast = () => {
     `https://api.openweathermap.org/geo/1.0/direct?q=${query}&appid=${REACT_APP_API_KEY}`
   );
   console.log("City Data:", response);
-  // const { lat } = response[0].lat;
+  // const lat = response[0].lat;
   // console.log("lat", lat);
 
   const [data] = useFetch(
@@ -58,10 +58,11 @@ const Forcast = () => {
         {
         data &&
           data.daily.map((data) => {
+            const date = new Date(data.dt*1000).toLocaleDateString('en-US');
             return (
 
             <div key={data.dt}>
-            <p>{Date(data.dt*1000)}</p>
+            <p>{date}</p>
             <p>{Math.floor(data.temp.day)}&#8457;</p>
             </div>
             )
