@@ -23,16 +23,24 @@ const Forcast = () => {
     setQuery("");
   };
 
-  const [response] = useFetch(
+  const [response] = 
+    useFetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${query}&appid=${REACT_APP_API_KEY}`
   );
-  console.log("City Data:", response);
-  // const lat = response[0].lat;
-  // console.log("lat", lat);
+
+  // const { lat, lon } = response[0]
+  const lat = 
+  // response[0].lat
+  '47.60357'
+  ;
+  const lon = 
+  // response[0].lon
+  '-122.32945'
+  ;
 
   const [data] = useFetch(
     // `https://api.openweathermap.org/data/2.5/forecast?q=phoenix&appid=${REACT_APP_API_KEY}`
-    `https://api.openweathermap.org/data/2.5/onecall?lat=33.44277&lon=-112.072754&units=imperial&appid=${REACT_APP_API_KEY}`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${REACT_APP_API_KEY}`
     // `https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${REACT_APP_API_KEY}`
   );
   console.log("hello", data);
