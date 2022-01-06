@@ -12,6 +12,7 @@ const Forcast = () => {
   const { isError, isLoading, data, submitRequest } = useFetchForcast();
 
   const onSubmit = (value) => {
+    console.log({value})
     submitRequest(value);
   };
 

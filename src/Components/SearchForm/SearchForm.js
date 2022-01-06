@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchForm = () => {
+const SearchForm = ({submitSearch}) => {
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("");
 
@@ -12,6 +12,7 @@ const SearchForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (!query || query === "") return;
+    submitSearch(query);
     setCity(query);
     setQuery("");
   };
