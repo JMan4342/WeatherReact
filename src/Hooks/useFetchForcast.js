@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 require("dotenv").config();
 
@@ -10,54 +10,59 @@ const useFetchForcast = () => {
   const [data, setData] = useState(null);
 
   const getLatLon = async (query) => {
-    const { data } = await fetch(
+    console.log({ query });
+
+    await fetch(
       `https://api.openweathermap.org/geo/1.0/direct?q=${query}&appid=${REACT_APP_API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => setData(data));
 
-    console.log({ data });
     if (!data || data.length === 0) {
       setError("There is no such location");
       setLoading(false);
       return;
     }
-    return data[0];
+    return data;
   };
+  useEffect(() => {
+    getLatLon();
+  }, []);
+  console.log({ data });
+
 
   const getForcastData = async (lat, lon) => {
     const { data } = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${REACT_APP_API_KEY}`
-        )
-        .then((res) => res.json())
-        .then((data) => setData(data));
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${REACT_APP_API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data));
 
-        if (!data || data.length === 0) {
-            setError("Something went wrong");
-            setLoading(false);
-            return;
-          }
-          return data;
-      
-  }
+    if (!data || data.length === 0) {
+      setError("Something went wrong");
+      setLoading(false);
+      return;
+    }
+    return data;
+  };
 
-  const submitRequest = async query => {
-      setLoading(true);
-      setError(false);
+  const submitRequest = async (query) => {
+    setLoading(true);
+    setError(false);
 
-      const response = await getLatLon(query);
-      if(!response?.lat || !response?.lon) return;
-      const data = await getForcastData(response[0].lat, response[0].lon);
+    const response = await getLatLon(query);
+    if (!response?.lat || !response?.lon) return;
+    const data = await getForcastData(response[0].lat, response[0].lon);
 
-      console.log({data})
-  }
+    console.log({ data });
+  };
 
-  return { 
-      isError,
-      isLoading,
-      data,
-      submitRequest,
-  }
+  return {
+    isError,
+    isLoading,
+    data,
+    submitRequest,
+  };
 };
 
 export default useFetchForcast;

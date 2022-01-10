@@ -12,16 +12,16 @@ const Forcast = () => {
   const { isError, isLoading, data, submitRequest } = useFetchForcast();
 
   const onSubmit = (value) => {
-    console.log({value})
     submitRequest(value);
+    console.log({value})
   };
 
   const [query, setQuery] = useState("");
   const [city, setCity] = useState("");
   // const [isError, setError] = useState(false);
   // const [isLoading, setLoading] = useState(false);
-  console.log({ query });
-  console.log({ city });
+  // console.log({ query });
+  // console.log({ city });
 
   // const inputHandler = (event) => {
   //   event.preventDefault();
@@ -114,7 +114,7 @@ const Forcast = () => {
         {!isLoading && <SearchForm submitSearch={onSubmit} />}
       </div>
       <div>
-        {data &&
+        {/* {data &&
           data.daily.map((data) => {
             const date = new Date(data.dt * 1000).toLocaleDateString("en-US");
             return (
@@ -123,7 +123,7 @@ const Forcast = () => {
                 <p>{Math.floor(data.temp.day)}&#8457;</p>
               </div>
             );
-          })}
+          })} */}
       </div>
     </div>
   );
